@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Preferences</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            background-color: #005f73;
+            transform: scale(1.1);
+        }
+        .animated-box {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 20px auto;
+            transition: transform 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Animated Preferences</h1>
+    <button class="btn" onclick="toggleAnimation()">Animate Box</button>
+    <button class="btn" onclick="savePreference()">Save Color</button>
+    <div class="animated-box" id="box"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let savedColor = localStorage.getItem("boxColor");
+            if (savedColor) {
+                document.getElementById("box").style.backgroundColor = savedColor;
+            }
+        });
+
+        function toggleAnimation() {
+            let box = document.getElementById("box");
+            box.style.transform = box.style.transform === "rotate(360deg)" ? "rotate(0deg)" : "rotate(360deg)";
+        }
+
+        function savePreference() {
+            let box = document.getElementById("box");
+            let newColor = box.style.backgroundColor === "red" ? "blue" : "red";
+            box.style.backgroundColor = newColor;
+            localStorage.setItem("boxColor", newColor);
+        }
+    </script>
+</body>
+</html>
